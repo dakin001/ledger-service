@@ -42,7 +42,7 @@ in case of you haven't install readme addon, your can read `pdf` version of `REA
 ![UI](./doc/UI.drawio.png)
 
 ## **System diagram**
-![System diagram.drawio.png](./doc/System%20diagram.drawio.png)
+![System diagram.drawio.png](./doc/System%20Diagram.drawio.png)
 
 ## **Movement Sequence diagram**
 ![Sequence Diagram.drawio.png](./doc/Sequence%20Diagram.drawio.png)
