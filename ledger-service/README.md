@@ -8,7 +8,7 @@ design documents in root folder [README.md](../README.md), please do not miss it
 1. start application
 ```shell
 ./gradlew build
-java -jar build/libs/app-server.jar -Dspring.profiles.active=
+java -Dspring.profiles.active= -jar build/libs/app-server.jar 
 ```
 
 2. open swagger-ui
@@ -27,5 +27,5 @@ docker-compose up -d
 3. start application
 ```shell
 ./gradlew build
-java -jar build/libs/app-server.jar -Dspring.profiles.active=local
+java -Dspring.profiles.active=local -jar build/libs/app-server.jar 
 ```

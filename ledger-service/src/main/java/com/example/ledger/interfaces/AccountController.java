@@ -49,8 +49,8 @@ public class AccountController {
     @Operation(summary = "request any historical balance of a wallet.",
             description = "request any historical balance of a wallet.", tags = {"Account"})
     @GetMapping("/{accountId}/wallets/{walletId}/balance")
-    public PageResult<WalletProjection> getBalance(@PathVariable("accountId") @Schema(defaultValue = "ABCDE001") String accountId,
-                                                   @PathVariable("walletId") @Schema(defaultValue = "CURRENCY") String walletId,
+    public PageResult<WalletProjection> getBalance(@PathVariable("accountId") @Schema(example = "ABCDE001") String accountId,
+                                                   @PathVariable("walletId") @Schema(example = "CURRENCY") String walletId,
                                                    @Valid BalanceQueryDto query) {
         query.setAccountNumber(accountId);
         query.setWalletType(walletId);

@@ -1,6 +1,7 @@
 package com.example.ledger.application.command;
 
 import com.example.ledger.domain.asset.AssetType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -19,8 +20,10 @@ public class BatchMovementCommandItem {
     @Min(1)
     @NotNull
     private BigDecimal amount;
+    @Schema(example = "A00000000")
     @NotEmpty
     private String sourceAccount;
+    @Schema(example = "ABCDE001")
     @NotEmpty
     private String targetAccount;
 }
