@@ -1,0 +1,31 @@
+
+# Important!  
+design documents in root folder [README.md](../README.md), please do not miss it.  
+
+# Getting Started
+
+## Method 1 - start without dependency 
+1. start application
+```shell
+./gradlew build
+java -jar build/libs/app-server.jar -Dspring.profiles.active=
+```
+
+2. open swagger-ui
+> [http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
+
+## Method 2 - start with dependency (optional)
+1. install Docker Desktop
+> https://www.docker.com/products/docker-desktop/
+
+2. start local third party dependence components
+```shell
+cd scripts 
+docker-compose up -d
+```
+
+3. start application
+```shell
+./gradlew build
+java -jar build/libs/app-server.jar -Dspring.profiles.active=local
+```
