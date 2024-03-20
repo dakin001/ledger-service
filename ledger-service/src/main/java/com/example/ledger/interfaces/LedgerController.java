@@ -27,7 +27,7 @@ public class LedgerController {
     }
 
     @Operation(summary = "Ledger Balance", description = "return user balance by sse", tags = {"Ledger"})
-    @GetMapping(value = "Balance", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "balance", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseBodyEmitter getBalance() throws IOException {
         // todo
         var sseEmitter = new SseEmitter(Duration.ofMinutes(60L).toMillis());

@@ -10,7 +10,7 @@ public class QueryServiceImpl implements QueryService {
     private final WalletProjectionRepository repository;
 
     @Override
-    public PageResult<WalletProjection> getBalance(BalanceQueryDto query) {
+    public PageResult<WalletProjection> getHistory(BalanceQueryDto query) {
         //todo Verify the user is the owner of the account
         var list = repository.getByAccountNumberAndWalletType(query);
 

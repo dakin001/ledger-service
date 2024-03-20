@@ -64,11 +64,11 @@ class AccountControllerTest {
     }
 
     @Test
-    void getBalance_success() throws Exception {
+    void getHistory_success() throws Exception {
         var argCaptor = ArgumentCaptor.forClass(BalanceQueryDto.class);
-        when(queryService.getBalance(argCaptor.capture())).thenReturn(new PageResult<>(List.of(new WalletProjection())));
+        when(queryService.getHistory(argCaptor.capture())).thenReturn(new PageResult<>(List.of(new WalletProjection())));
 
-        this.mockMvc.perform(get("/accounts/ABCDE001/wallets/CURRENCY/balance")
+        this.mockMvc.perform(get("/accounts/ABCDE001/wallets/CURRENCY/history")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
