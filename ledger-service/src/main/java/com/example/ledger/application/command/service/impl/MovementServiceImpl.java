@@ -9,6 +9,7 @@ import com.example.ledger.domain.movement.BatchMovement;
 import com.example.ledger.domain.movement.MovementRepository;
 import com.example.ledger.domain.shared.annotation.DistributedLock;
 import lombok.RequiredArgsConstructor;
+import org.springframework.retry.RetryException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,9 +38,13 @@ public class MovementServiceImpl implements MovementService {
         }
 
         movement.setAccountService(accountService);
-        // Eventual consistency, this method may run multiple times by MQ trigger
         movement.execute();
         movementRepository.save(movement);
+
+        // Eventual consistency, this method may run multiple times by MQ trigger
+        if (!movement.isFinalStatus()) {
+            throw new RetryException("movement not finished");
+        }
     }
 
     private BatchMovement getBatchMovement(BatchMovementCommand movementCommand) {
