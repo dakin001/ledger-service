@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
+import org.springframework.kafka.support.converter.JsonMessageConverter;
+import org.springframework.kafka.support.converter.RecordMessageConverter;
 
 @Configuration
 @ConditionalOnExpression("${spring.kafka.enabled:true}")
@@ -26,5 +28,11 @@ public class KafkaConfig {
                 .partitions(2)
                 .replicas(1)
                 .build();
+    }
+
+    // for KafkaListener strong type param
+    @Bean
+    public RecordMessageConverter converter() {
+        return new JsonMessageConverter();
     }
 }
