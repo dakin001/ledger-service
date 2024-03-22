@@ -2,6 +2,8 @@ package com.example.ledger.infrastructure.mq.kafka;
 
 import com.example.ledger.application.command.mq.MqProducerService;
 import com.example.ledger.domain.shared.model.Event;
+import com.example.ledger.domain.shared.util.JsonSerializationUtils;
+import com.example.ledger.infrastructure.mq.kafka.event.DataChangeEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,15 @@ public class KafkaProducerServiceImpl implements MqProducerService {
     @Transactional(rollbackFor = Exception.class)
     public void storeAndPublishAccountEvents(Runnable businessDataSave, String id, List<Event<?>> events) {
         businessDataSave.run();
-        outboxProcessor.saveMsgThenAsyncSend(appConfig.getEventTopic(), id, id);
+        var data = JsonSerializationUtils.serialize(new DataChangeEvent(id, null));
+        outboxProcessor.saveMsgThenAsyncSend(appConfig.getEventTopic(), id, data);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void storeAndPublishMovementEvents(Runnable businessDataSave, String id) {
         businessDataSave.run();
-        outboxProcessor.saveMsgThenAsyncSend(appConfig.getEventTopic(), id, id);
+        var data = JsonSerializationUtils.serialize(new DataChangeEvent(id, null));
+        outboxProcessor.saveMsgThenAsyncSend(appConfig.getMovementTopic(), id, data);
     }
 }
