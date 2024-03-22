@@ -54,7 +54,7 @@ public class MovementServiceImpl implements MovementService {
 
     private void storeAndPublishEvents(BatchMovement movement) {
         if (!movement.isFinalStatus()) {
-            mqProducerService.sendMovementInTransaction(() -> movementRepository.save(movement),
+            mqProducerService.storeAndPublishMovementEvents(() -> movementRepository.save(movement),
                     movement.getId());
             return;
         }

@@ -5,7 +5,7 @@ import com.example.ledger.application.command.service.AccountService;
 import com.example.ledger.domain.movement.BatchMovement;
 import com.example.ledger.domain.movement.MovementRepository;
 import com.example.ledger.domain.shared.AppConfig;
-import com.example.ledger.infrastructure.mq.local.MqProducerServiceImpl;
+import com.example.ledger.infrastructure.mq.local.LocalProducerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +34,7 @@ class MovementServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        service = new MovementServiceImpl(movementRepository, accountService, new MqProducerServiceImpl(eventPublisher));
+        service = new MovementServiceImpl(movementRepository, accountService, new LocalProducerServiceImpl(eventPublisher));
 
     }
 

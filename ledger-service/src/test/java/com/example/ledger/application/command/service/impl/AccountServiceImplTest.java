@@ -7,7 +7,7 @@ import com.example.ledger.domain.account.exception.AccountClosedException;
 import com.example.ledger.domain.asset.Asset;
 import com.example.ledger.domain.asset.AssetType;
 import com.example.ledger.domain.shared.AppConfig;
-import com.example.ledger.infrastructure.mq.local.MqProducerServiceImpl;
+import com.example.ledger.infrastructure.mq.local.LocalProducerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,7 +43,7 @@ class AccountServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        service = new AccountServiceImpl(accountRepository, appConfig, new MqProducerServiceImpl(eventPublisher));
+        service = new AccountServiceImpl(accountRepository, appConfig, new LocalProducerServiceImpl(eventPublisher));
 
         testAsset = new Asset(AssetType.CURRENCY);
         testAsset.setId("1");

@@ -18,15 +18,15 @@ public class KafkaProducerServiceImpl implements MqProducerService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void sendEventsInTransaction(Runnable businessDbSave, String id, List<Event<?>> events) {
-        businessDbSave.run();
+    public void storeAndPublishAccountEvents(Runnable businessDataSave, String id, List<Event<?>> events) {
+        businessDataSave.run();
         outboxProcessor.saveMsgThenAsyncSend(appConfig.getEventTopic(), id, id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void sendMovementInTransaction(Runnable businessDbSave, String id) {
-        businessDbSave.run();
+    public void storeAndPublishMovementEvents(Runnable businessDataSave, String id) {
+        businessDataSave.run();
         outboxProcessor.saveMsgThenAsyncSend(appConfig.getEventTopic(), id, id);
     }
 }

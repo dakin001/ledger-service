@@ -113,7 +113,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     private void storeAndPublishEvents(Account account) {
-        mqProducerService.sendEventsInTransaction(() -> accountRepository.save(account), account.getId(), account.getChanges());
+        mqProducerService.storeAndPublishAccountEvents(() -> accountRepository.save(account), account.getId(), account.getChanges());
     }
 
     private Account convertToNegativeAccount(Account account) {
