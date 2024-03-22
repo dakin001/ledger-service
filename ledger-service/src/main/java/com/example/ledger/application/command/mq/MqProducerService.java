@@ -5,8 +5,8 @@ import com.example.ledger.domain.shared.model.Event;
 import java.util.List;
 
 public interface MqProducerService {
-    void sendEventsInTransaction(Runnable runnable, String id, List<Event<?>> events);
+    void storeAndPublishAccountEvents(Runnable runnable, String id, List<Event<?>> events);
 
-    void sendMovementInTransaction(Runnable runnable, String id);
+    void storeAndPublishMovementEvents(Runnable runnable, String id);
 }
 
