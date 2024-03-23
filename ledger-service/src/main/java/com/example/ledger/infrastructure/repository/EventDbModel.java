@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "event_record", indexes = {
-        @Index(name = "idx_aggregate_id", columnList = "aggregateId")
+        @Index(name = "ux_aggregate_id_version", columnList = "aggregateId,version", unique = true)
 })
 public class EventDbModel {
     @Id
