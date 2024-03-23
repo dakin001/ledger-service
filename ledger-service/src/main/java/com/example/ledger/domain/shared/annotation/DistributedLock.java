@@ -11,4 +11,6 @@ public @interface DistributedLock {
     String key() default "";
 
     long expireSecond() default 6000;
+
+    long waitSecond() default 2;
 }
