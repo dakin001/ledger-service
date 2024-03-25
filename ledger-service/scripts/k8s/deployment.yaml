@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ledger-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ledger-backend
+  template:
+    metadata:
+      labels:
+        app: ledger-backend
+        env: dev
+    spec:
+      containers:
+        - name: ledger-backend
+          image: ledger/service:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 60
+          env:
+            - name: PROFILE
+              value: "local"

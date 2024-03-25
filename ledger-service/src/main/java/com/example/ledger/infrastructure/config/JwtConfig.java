@@ -40,7 +40,7 @@ public class JwtConfig {
         SecretKey secretKey = new SecretKeySpec(secret.getBytes(), MacAlgorithm.HS256.getName());
 
         jwkList.add(new OctetSequenceKey.Builder(secretKey)
-            .build());
+                .build());
 
         JWKSource<SecurityContext> jwkSource = (jwkSelector, securityContext) -> jwkSelector.select(new JWKSet(jwkList));
 
