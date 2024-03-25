@@ -1,6 +1,7 @@
 package com.example.ledger.infrastructure.config;
 
 import com.example.ledger.domain.shared.model.BusinessException;
+import com.example.ledger.domain.shared.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,9 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BindException.class)
-    public ResponseEntity<String> businessExceptionHandler(BindException ex) {
+    public ResponseEntity<Object> businessExceptionHandler(BindException ex) {
         //  msg for debug in developing
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ex.getMessage());
+                .body(new ErrorResponse(ex.getMessage()));
     }
-
 }
