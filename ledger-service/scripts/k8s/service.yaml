@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ledger-backend
+  name: ledger-backend-service
+spec:
+  type: NodePort # set LoadBalancer if in cloud
+  ports:
+    - port: 8080
+      nodePort: 30080
+  selector:
+    app: ledger-backend
+    env: dev
+  sessionAffinity: None

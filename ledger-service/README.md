@@ -29,3 +29,20 @@ docker-compose up -d
 ./gradlew build
 java -Dspring.profiles.active=local -jar build/libs/app-server.jar 
 ```
+
+
+## deployment (not test yet, need add dependencies)
+precondition  
+`./gradlew build`
+
+1. build docker image
+   in project root folder
+```shell
+docker build -t ledger/service:v1 .
+```
+
+2. deployment in kubernetes
+```shell
+kubectl apply -f scripts/k8s/deployment.yaml
+kubectl apply -f scripts/k8s/service.yaml
+```

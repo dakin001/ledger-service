@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,7 +24,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-@ConditionalOnMissingBean(SecurityDisableFilter.class)
+@ConditionalOnExpression("${securityDisable:false} == false")
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Value("${permitUrls:}")
     private List<String> permitUrls;
