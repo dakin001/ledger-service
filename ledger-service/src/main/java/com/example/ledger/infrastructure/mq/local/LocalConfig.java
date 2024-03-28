@@ -12,9 +12,4 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @Getter
 public class LocalConfig {
-    @Value("${eventTopic:event}")
-    private String eventTopic;
-
-    @Value("${movementTopic:movement}")
-    private String movementTopic;
 }
